@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: "{{doc('stg_customers_desc')}}"
+    columns:
+      - name: customerid
+        tests:
+          - unique
+          - not_null
+  - name: stg_products
+    description: Products master data for QWt projects
+    columns:
+      - name: productid
+        tests:
+          - not_null
+          - unique
+  - name: stg_employees
+    description: Employee master data for QWt projects
+    columns:
+      - name: empid
+        tests:
+          - not_null
+          - unique
+  - name: stg_shipments
+    description: Shipments master data for QWt projects
+    columns:
+      - name: status
+        tests:
+          - accepted_values:
+              values: ['shipped','returned','ordered','replaced']
+  - name: stg_orderdetails
+    description: Prder details master data for QWt projects
+    columns:
+      - name: orderid
+        tests:
+          - relationships:
+              to: ref('stg_orders')
+              field: orderid
