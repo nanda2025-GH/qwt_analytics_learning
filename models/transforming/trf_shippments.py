@@ -2,7 +2,7 @@ import snowflake.snowpark.functions as F
 
 def model(dbt, session):
 
-    dbt.config(materialized = 'table' , schema = 'transforming_dev')
+    dbt.config(materialized = 'table' )
 
     shipments_df = dbt.ref('shipment_snapshot')
 
