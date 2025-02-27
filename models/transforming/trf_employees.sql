@@ -24,8 +24,10 @@ with recursive managers
       offices (officeid, officecity, officecountry)
       as
       (
-      select officeid, officecity, officecountry from {{ref('stg_offices')}}
-      )
+      select ho.officeid, so.officecity, so.officecountry from {{ref('stg_sat_offices')}} as so inner join 
+      {{ref("stg_hub_offices")}} as ho
+      on so.officehashkey=ho.officehashkey
+            )
  
   -- This is the "main select".
   select managers.indent, managers.employee_id, offices.officecity, offices.officecountry,
